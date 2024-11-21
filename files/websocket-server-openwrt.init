@@ -1,0 +1,17 @@
+#!/bin/sh /etc/rc.common
+# OpenWrt init script for WebSocket Server
+
+START=99
+STOP=10
+
+USE_PROCD=1
+PROG="/usr/bin/node"
+SCRIPT="/usr/share/websocket-server/websocket-server.js"
+NODE_PATH="/usr/share/websocket-server/node_modules"
+
+start_service() {
+    procd_open_instance
+    procd_set_param command $PROG $SCRIPT
+    procd_set_param env NODE_PATH=$NODE_PATH
+    procd_close_instance
+}
